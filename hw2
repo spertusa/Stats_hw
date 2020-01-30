@@ -1,0 +1,13 @@
+df = read.csv("LaborData.csv", header = T)
+summary(df$GESTATIONAL.AGE)
+summary(df$WEIGHT)
+
+plot(df$GESTATIONAL.AGE, df$WEIGHT, main = "Gestational Age vs. Weight", 
+     xlab = "Gestational Age", ylab = "Weight", type = "p", pch = 20, col = "red")
+fit <- lm(df$GESTATIONAL.AGE ~ df$WEIGHT, data = df)abline(coef(fit)[1:2])
+summary(fit)
+
+with(df, plot(df$GESTATIONAL.AGE, df$WEIGHT))
+abline(fit)
+
+#get Labor Data from this page: https://www.math.wustl.edu/~jmding/math3200/h3200.html
