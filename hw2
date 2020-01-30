@@ -1,13 +1,14 @@
 df = read.csv("LaborData.csv", header = T)
-summary(df$GESTATIONAL.AGE)
-summary(df$WEIGHT)
+#summary(df$GESTATIONAL.AGE)
+#summary(df$WEIGHT)
 
-plot(df$GESTATIONAL.AGE, df$WEIGHT, main = "Gestational Age vs. Weight", 
-     xlab = "Gestational Age", ylab = "Weight", type = "p", pch = 20, col = "red")
-fit <- lm(df$GESTATIONAL.AGE ~ df$WEIGHT, data = df)abline(coef(fit)[1:2])
-summary(fit)
+#plot(df$GESTATIONAL.AGE, df$WEIGHT, main = "Gestational Age vs. Weight", xlab = "Gestational Age", ylab = "Weight", type = "p", pch = 20, col = "red")
+reg1 <- lm(df$GESTATIONAL.AGE ~ df$WEIGHT, data = df)abline(coef(fit)[1:2])
+summary(reg1)
 
 with(df, plot(df$GESTATIONAL.AGE, df$WEIGHT))
-abline(fit)
+abline(reg1)
 
-#get Labor Data from this page: https://www.math.wustl.edu/~jmding/math3200/h3200.html
+
+#cov(df$GESTATIONAL.AGE, df$WEIGHT)
+#cor(df$GESTATIONAL.AGE, df$WEIGHT)
