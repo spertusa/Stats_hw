@@ -20,7 +20,8 @@ levels(Delivery.types)
 "
 #creates new data frame with only gestational age and delivery type
 df = data.frame(col1 = df$Child.GENDER,
-                col2 = df$Delivery.Type)
+                col2 = df$Delivery.Type,
+                col3 = MOTHER.RACE)
 "
 
 head(df)
