@@ -1,14 +1,38 @@
 df = read.csv("LaborData.csv", header = T)
-#summary(df$GESTATIONAL.AGE)
-#summary(df$WEIGHT)
 
-#plot(df$GESTATIONAL.AGE, df$WEIGHT, main = "Gestational Age vs. Weight", xlab = "Gestational Age", ylab = "Weight", type = "p", pch = 20, col = "red")
-reg1 <- lm(df$GESTATIONAL.AGE ~ df$WEIGHT, data = df)abline(coef(fit)[1:2])
-summary(reg1)
+#installs tidyr package for easier data manipulation
+install.packages("tidyverse::seperate")    
+install.packages(c("tidyr", "devtools"))
+install.packages("zeallot")
+library(tidyverse)
+library(dplyr)
+library(plyr)
 
-with(df, plot(df$GESTATIONAL.AGE, df$WEIGHT))
-abline(reg1)
+#seperates DELIVERY.TYPE into two columns so DELIVERY TYPE will only consist of two options: c-section and vaginal
+df = separate(data = df, col = DELIVERY.TYPE, into = c("Delivery.Type","Delivery.Info"),
+              sep = "\\,", remove = TRUE, convert = FALSE, extra = "warn",)
+
+# Assigns C-sections as "1" and Vaginal deliveries as "0"
+Delivery.types <- factor(c("C-Section","Vaginal"), labels=c(1,0))
+str(Delivery.types)
+levels(Delivery.types)
+
+"
+#creates new data frame with only gestational age and delivery type
+df = data.frame(col1 = df$Child.GENDER,
+                col2 = df$Delivery.Type)
+"
+
+head(df)
+
+# Summary of Gestational Age and Weight
+summary(df$DELIVERY.TYPE)
+summary(df$Child.GENDER)
+
+plot(df$child.GENDER, Delivery.types, ylab = "Gender", xlab = "Delivery Type",
+     main = "Correlation between Child Gender and Delivery Type")
 
 
-#cov(df$GESTATIONAL.AGE, df$WEIGHT)
-#cor(df$GESTATIONAL.AGE, df$WEIGHT)
+# Shows correlation and covariance of two variables
+cov(df$DELIVERY.TYPE, df$Child.GENDER)
+cor(df$GESTATIONAL.AGE, df$WEIGHT)
